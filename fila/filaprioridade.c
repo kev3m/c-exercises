@@ -32,6 +32,51 @@ void inserir_na_fila(Celula **fila, int num){
         printf("Erro ao alocar memória");
         }
 }
+
+void inserir_na_fila_com_prioridade(Celula **fila, int num){
+    Celula *aux, *nova = malloc(sizeof(Celula));
+    if (nova) {
+        nova->dado = num;
+        nova->proximo = NULL; //SEMPRE NULO POIS ESTÁ NO FINAL
+
+        if(*fila == NULL){
+            *fila = nova;
+
+        }
+        else {
+            //É prioridade?
+            if (num > 59){
+                //é a primeira prioridade?
+                if((*fila)->dado < 60){
+                    nova->proximo = *fila;
+                    *fila = nova;
+
+
+                }
+                else {
+                    aux = *fila; //Não pode utilizar *fila pois se não a referência será perdida
+                    while(aux->proximo != NULL) {
+                        aux = aux->proximo;     
+                        }
+                        aux->proximo = nova;
+                }
+
+            }
+            else {
+                aux = *fila; //Não pode utilizar *fila pois se não a referência será perdida
+                while(aux->proximo != NULL) {
+                    aux = aux->proximo;     
+                    }
+                    aux->proximo = nova;
+                }
+            }
+            
+    }
+    else {
+        printf("Erro ao alocar memória");
+        }
+}
+
 Celula* remover_da_fila(Celula **fila){
     Celula *remover = NULL;
 
