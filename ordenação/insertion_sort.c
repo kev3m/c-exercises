@@ -5,7 +5,25 @@
 #include <time.h>
 
 
+void insertion(int *vet, int size) {
+    int x, j, aux;
 
+    for(x = 1;x < size;x++) {
+        aux = vet[x];
+
+        for (j = x - 1;j >= 0 && vet[j] > aux;j--){
+            vet[j+1] = vet[j];
+
+        }
+        vet[j+1] = aux;
+
+
+    }
+
+
+
+
+}
 
 int main() {
 
@@ -21,7 +39,7 @@ int main() {
         printf("%3d", vetor[i]);
     }
     
-    printf("\nApos a ordenacao: Contador %d\n", contador);
+    printf("\nApos a ordenacao: ");
     for(i = 0; i < 20; i++) {
         printf("%3d", vetor[i]);
     }
