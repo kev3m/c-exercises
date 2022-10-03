@@ -28,6 +28,7 @@ void inserir_na_Lista(Lista *l, int valor){
         novo->chave = valor;
         novo->proximo = l->inicio;
         l->inicio = novo;
+        l->tam++;
     }
     else 
         printf("Erro ao alocar memoria");
@@ -72,20 +73,24 @@ void inserir(Lista t[],int valor){
 }
 int busca(int t[], int chave){
     int id = funcao_Hash(chave);
-    
-    return 0;
+    printf("\n Indice gerada: %d\n", id);
+    return buscar_na_Lista(&t[id], chave);
 }
 
-void imprimir(int t[]){
+void imprimir(Lista t[]){
     int i;
     for (i = 0; i < TAM; i++ ){
-        printf("%d = %d\n",i ,t[i]);
+        printf("%2d = ", i);
+        imprimir_lista(&t[i]);
+        printf("\n");
+
     }
 }
 
 int main(){
 
-    int opcao, valor,retorno, tabela[TAM];
+    int opcao, valor,retorno;
+    Lista tabela[TAM];
 
     inicializar_Tabela(tabela);
 
