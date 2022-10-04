@@ -1,6 +1,7 @@
 # include <stdio.h>
 # include <stdlib.h>
-# include <conio.h>
+# include <time.h>
+
 
 typedef struct No{
 	int chave;
@@ -15,6 +16,8 @@ void PreOrdem (arvore *);
 void PosOrdem (arvore *);
 int Altura (arvore *);
 int QtdNos (arvore *);
+int QtdNosInternos (arvore *);
+int QtdNosFilhoUnico (arvore *);
 
 void Imprime (arvore *, int);
 
@@ -34,6 +37,7 @@ void main()
 			printf(" 5 - Imprime a arvore.\n");
 			printf(" 6 - Altura da arvore.\n");
 			printf(" 7 - Quantidade de nos.\n");
+			printf(" 8 - Quantidade de nos internos.\n");
 			printf(" 15 - Sai do Programa.\n");
 			printf("Opcao: ");
 			scanf("%d", & opcao);
@@ -48,26 +52,41 @@ void main()
 								  
 				case 2:
 					InOrdem(raiz);
+					Sleep(2500);
 					break;
 
 				case 3:
 					PreOrdem(raiz);
+					Sleep(2500);
 					break;
 				
 				case 4:
 					PosOrdem(raiz);
+					Sleep(2500);
 					break;
 				
 				case 5:
 					Imprime(raiz,1);
+					Sleep(2500);
 					break;
 					
 				case 6:
 					printf("A altura da arvore eh %d.\n", Altura(raiz));
+					Sleep(2500);
 					break;
 					
 				case 7:
 					printf("A quantidade de nos da arvore eh %d.\n", QtdNos(raiz));
+					Sleep(2500);
+					break;
+
+				case 8:
+					printf("A quantidade de nos internos da arvore eh %d.\n", QtdNosInternos(raiz));
+					Sleep(2500);
+					break;
+				case 9:
+					printf("A quantidade de nos da arvore que possuem apenas 1 filho. %d.\n", QtdNosFilhoUnico(raiz));
+					Sleep(2500);
 					break;
 					
 				case 15:
@@ -76,7 +95,6 @@ void main()
 
 				default:  
 					printf("\nOpcao invalida!\n"); 
-					getch();
 					break;
 	}
 	
@@ -192,4 +210,22 @@ int QtdNos (arvore * r)
 		return 0;
 	else
 		return 1 + QtdNos(r->esq) + QtdNos(r->dir);
+}
+
+int QtdNosInternos(arvore * r) {
+
+	if (r == NULL)
+		return 0;
+	else if (r->esq == NULL && r->dir == NULL)
+		return 0;
+	else
+		return 1 + QtdNosInternos(r->esq) + QtdNosInternos(r->dir);
+}
+
+int QtdNosFilhoUnico(arvore * r) {
+
+	if (r == NULL)
+		return 0;
+	else if (r->esq == NULL && r->dir != NULL || r->esq != NULL && r->dir == NULL)
+		return 1 + QtdNosFilhoUnico(r->esq) + QtdNosFilhoUnico(r->dir);
 }
